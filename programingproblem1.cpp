@@ -2,8 +2,22 @@
 #include <fstream>
 #include <string>
 using namespace std;
+static const int globalmax = 100; 
 
-void printing(int matrix[100][100], int n){
+void printing(int matrix[globalmax][globalmax], int n);
+void sum(int matrix1[globalmax][globalmax], int matrix2[globalmax][globalmax], int n);
+void difference(int matrix1[globalmax][globalmax], int matrix2[globalmax][globalmax], int n);
+void multiplying(int matrix1[globalmax][globalmax], int matrix2[globalmax][globalmax], int n);
+void readfile(string filename);
+int main(){
+    string filename;
+    cout << "Enter the file name:";
+    cin >> filename;
+    cout << "Hannah Smith"<<endl;
+    cout << "Lab #6: Matrix manipulation"<<endl;
+    readfile(filename);
+}
+void printing(int matrix[globalmax][globalmax], int n){
     for (int i = 0; i<n; ++i){
         for (int j = 0; j<n; ++j){
             cout << matrix[i][j];
@@ -12,8 +26,8 @@ void printing(int matrix[100][100], int n){
         cout <<"\n";
     }
 }
-void sum(int matrix1[100][100], int matrix2[100][100], int n){
-    int sumMatrix [100][100];
+void sum(int matrix1[globalmax][globalmax], int matrix2[globalmax][globalmax], int n){
+    int sumMatrix [globalmax][globalmax];
     for (int i=0; i<n; ++i){
         for (int j=0; j<n; ++j){
             sumMatrix[i][j] = matrix1[i][j] + matrix2[i][j];
@@ -22,8 +36,8 @@ void sum(int matrix1[100][100], int matrix2[100][100], int n){
     cout<<"Matrix(A+B)"<<endl;
     printing(sumMatrix, n);
 }
-void difference(int matrix1[100][100], int matrix2[100][100], int n){
-    int difMatrix [100][100];
+void difference(int matrix1[globalmax][globalmax], int matrix2[globalmax][globalmax], int n){
+    int difMatrix [globalmax][globalmax];
     for (int i=0; i<n; ++i){
         for (int j=0; j<n; ++j){
             difMatrix[i][j] = matrix1[i][j] - matrix2[i][j];
@@ -32,8 +46,8 @@ void difference(int matrix1[100][100], int matrix2[100][100], int n){
     cout<<"Matrix(A-B)"<<endl;
     printing(difMatrix, n);
 }
-void multiplying(int matrix1[100][100], int matrix2[100][100], int n){
-    int product [100][100];
+void multiplying(int matrix1[globalmax][globalmax], int matrix2[globalmax][globalmax], int n){
+    int product [globalmax][globalmax];
     for (int i=0; i<n; ++i){
         for (int j=0; j<n; ++j){
             int x = 0;
@@ -49,11 +63,11 @@ void multiplying(int matrix1[100][100], int matrix2[100][100], int n){
     printing(product, n);
 }
 void readfile(string filename){
-    int matrix1[100][100];
-    int matrix2[100][100];
+    int matrix1[globalmax][globalmax];
+    int matrix2[globalmax][globalmax];
     ifstream inputfile;
     inputfile.open(filename);
-    int n;
+    static int n;
     inputfile >> n;
     for(int i = 0; i < n; ++i) {
         for(int j = 0; j < n; ++j) {
@@ -73,12 +87,4 @@ void readfile(string filename){
     multiplying(matrix1, matrix2, n);
     difference(matrix1, matrix2, n);
 
-}
-int main(){
-    string filename;
-    cout << "Enter the file name:";
-    cin >> filename;
-    cout << "Hannah Smith"<<endl;
-    cout << "Lab #6: Matrix manipulation"<<endl;
-    readfile(filename);
 }
